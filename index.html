@@ -27,30 +27,27 @@
       max-width: 450px;
       box-sizing: border-box;
       position: relative;
-      /* הוספת תמונת רקע */
-      background-image: url('mm.jpg'); /* תמונת רקע דיפולטית */
-      background-size: cover; /* מכסה את כל שטח הרקע */
-      background-position: center; /* ממקם את התמונה במרכז */
-      background-repeat: no-repeat; /* מונע חזרתיות של התמונה */
-      /* שכבת צבע שקופה מעל התמונה כדי לשמור על קריאות הטקסט */
-      background-blend-mode: overlay; /* או multiply, screen, soft-light וכו' */
-      background-color: rgba(255, 255, 255, 0.85); /* שכבה לבנה שקופה */
+      background-image: url('mm.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay;
+      background-color: rgba(255, 255, 255, 0.85);
     }
-    /* וודא שהטקסט בתוך ה-form-container קריא */
+    
     .form-container h1, .form-container h2, .form-container p, .form-container h3, .form-container label {
-        color: #333; /* צבע כהה יותר כדי לבלוט על הרקע הבהיר */
-        z-index: 2; /* מוודא שהטקסט מעל השכבה השקופה */
-        position: relative; /* נחוץ עבור z-index */
+        color: #333;
+        z-index: 2;
+        position: relative;
     }
-    /* אם יש לך תמונת רקע כללית לדף, ניתן להוסיף אותה כאן ל-body */
+
     body {
-        background-image: url('https://via.placeholder.com/1920x1080/c0d9e6/333333?text=Main+Background'); /* תמונת רקע לדף כולו */
+        background-image: url('https://via.placeholder.com/1920x1080/c0d9e6/333333?text=Main+Background');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-attachment: fixed; /* מקבע את התמונה ברקע */
+        background-attachment: fixed;
     }
-
 
     .header-content {
       margin-bottom: 25px;
@@ -247,8 +244,8 @@
             width: 95%;
             max-width: none;
             box-shadow: none;
-            background-image: url('mm.jpg'); /* תמונת רקע למובייל */
-            background-color: rgba(255, 255, 255, 0.8); /* שכבה לבנה שקופה במובייל */
+            background-image: url('mm.jpg');
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
         h1 {
@@ -277,10 +274,15 @@
             font-size: 1rem;
         }
 
+        /* שומר על הלחצנים בשורה אחת במובייל */
         .radio-group {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .radio-item {
+            margin: 0 5px;
         }
 
         .radio-item label {
@@ -298,14 +300,16 @@
             width: 10px;
             height: 10px;
         }
-
+        
+        /* הופך את סדר ההורים במובייל: הורי הכלה מימין והורי החתן משמאל */
         .parents-row {
-            flex-direction: column;
+            flex-direction: row-reverse;
             gap: 20px;
+            justify-content: center;
         }
 
         .parents-box {
-            width: 100%;
+            width: 48%;
         }
     }
   </style>
