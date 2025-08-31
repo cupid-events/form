@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>החתונה של מאיר ושובל</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&display=swap');
+
+    body {
+      font-family: 'Heebo', Arial, sans-serif;
+      text-align: center;
+      background-color: #eef2f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+      box-sizing: border-box;
+      position: relative;
+      /* הוספת תמונת רקע */
+      background-image: url('mm.jpg'); /* תמונת רקע דיפולטית */
+      background-size: cover; /* מכסה את כל שטח הרקע */
+      background-position: center; /* ממקם את התמונה במרכז */
+      background-repeat: no-repeat; /* מונע חזרתיות של התמונה */
+      /* שכבת צבע שקופה מעל התמונה כדי לשמור על קריאות הטקסט */
+      background-blend-mode: overlay; /* או multiply, screen, soft-light וכו' */
+      background-color: rgba(255, 255, 255, 0.85); /* שכבה לבנה שקופה */
+    }
+    /* וודא שהטקסט בתוך ה-form-container קריא */
+    .form-container h1, .form-container h2, .form-container p, .form-container h3, .form-container label {
+        color: #333; /* צבע כהה יותר כדי לבלוט על הרקע הבהיר */
+        z-index: 2; /* מוודא שהטקסט מעל השכבה השקופה */
+        position: relative; /* נחוץ עבור z-index */
+    }
+    /* אם יש לך תמונת רקע כללית לדף, ניתן להוסיף אותה כאן ל-body */
+    body {
+        background-image: url('https://via.placeholder.com/1920x1080/c0d9e6/333333?text=Main+Background'); /* תמונת רקע לדף כולו */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* מקבע את התמונה ברקע */
+    }
+
+
+    .header-content {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .header-content h1 {
+      font-size: 2.8rem;
+      color: #333;
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+
+    .header-content p {
+      font-size: 1.1rem;
+      color: #666;
+      margin: 5px 0;
+      line-height: 1.4;
+    }
+
+    .header-content .date {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #007bff;
+      margin-top: 15px;
+    }
+
+    .parents-row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    .parents-box {
+      text-align: center;
+      width: 48%;
+    }
+
+    .parents-box h3 {
+      font-size: 1.2rem;
+      color: #444;
+      margin: 0 0 5px;
+      font-weight: 700;
+    }
+
+    .parents-box p {
+      font-size: 1rem;
+      color: #555;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"] {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      box-sizing: border-box;
+      background-color: #fcfcfc;
+      text-align: center;
+    }
+
+    input[type="text"]:focus,
+    input[type="tel"]:focus,
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+    }
+
+    .radio-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0;
+      padding: 10px 0;
+    }
+
+    .radio-item {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .radio-item input[type="radio"] {
+      display: none;
+    }
+
+    .radio-item label {
+      position: relative;
+      padding-right: 30px;
+      font-size: 1.1rem;
+      color: #555;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .radio-item label::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      background-color: #fff;
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    .radio-item input[type="radio"]:checked+label::before {
+      border-color: #007bff;
+      background-color: #007bff;
+    }
+
+    .radio-item input[type="radio"]:checked+label::after {
+      content: '';
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+
+    button {
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+      margin-top: 15px;
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+    }
+
+    #quantity-container {
+      display: none;
+    }
+
+    #success-message {
+      display: none;
+      color: #28a745;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    #loading-spinner {
+      display: none;
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #007bff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* התאמה למובייל */
+    @media (max-width: 600px) {
+        .form-container {
+            padding: 20px;
+            width: 95%;
+            max-width: none;
+            box-shadow: none;
+            background-image: url('https://via.placeholder.com/400x700/e0e0e0/ffffff?text=Wedding+Background+Mobile'); /* תמונת רקע למובייל */
+            background-color: rgba(255, 255, 255, 0.8); /* שכבה לבנה שקופה במובייל */
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        .header-content p,
+        .parents-box p,
+        .parents-box h3 {
+            font-size: 0.9rem;
+        }
+
+        .header-content .date {
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        button {
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        .radio-group {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .radio-item label {
+            padding-right: 25px;
+        }
+
+        .radio-item label::before {
+            width: 18px;
+            height: 18px;
+        }
+
+        .radio-item input[type="radio"]:checked+label::after {
+            right: 4px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+        }
+
+        .parents-row {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .parents-box {
+            width: 100%;
+        }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="header-content">
+      <h1>החתונה של מאיר ושובל</h1>
+      <p>האירוע יתקיים באולמי אודיסאה</p>
+      <p>הנרייטה סולד 4, באר שבע</p>
+      <p class="date">27 | 10 | 25</p>
+      <p>יום שני</p>
+      <p>ה' בחשון</p>
+    </div>
+
+    <div class="parents-row">
+      <div class="parents-box">
+        <h3>הורי הכלה</h3>
+        <p>יוסי ויוסה בוחבוט</p>
+      </div>
+      <div class="parents-box">
+        <h3>הורי החתן</h3>
+        <p>רפי ומירב מרגי</p>
+      </div>
+    </div>
+    
+    <h2>טופס אישור הגעה</h2>
+    
+    <div id="success-message">
+      תשובתך נשמרה בהצלחה, תודה!
+    </div>
+    
+    <div id="loading-spinner"></div>
+    
+    <form id="rsvp-form">
+      <input type="text" name="fullName" placeholder="שם מלא" required>
+      
+      <input 
+        type="tel" 
+        name="phoneNumber" 
+        pattern="[0-9]{3}-?[0-9]{7}" 
+        placeholder="מספר טלפון" 
+        required
+        maxlength="11"
+        id="phoneNumberInput">
+      
+      <div class="radio-group">
+        <label>מגיע/ה:</label>
+        <div class="radio-item">
+          <input type="radio" id="rsvp-yes" name="rsvpStatus" value="כן" required>
+          <label for="rsvp-yes">כן</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="rsvp-no" name="rsvpStatus" value="לא" required>
+          <label for="rsvp-no">לא</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" id="rsvp-maybe" name="rsvpStatus" value="אולי" required>
+          <label for="rsvp-maybe">אולי</label>
+        </div>
+      </div>
+      
+      <div id="quantity-container">
+        <input type="number" name="quantity" placeholder="כמה אנשים?" min="1">
+      </div>
+      
+      <button type="submit">שלח</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("rsvp-form");
+    const phoneNumberInput = document.getElementById('phoneNumberInput');
+    const quantityContainer = document.getElementById('quantity-container');
+    const quantityInput = quantityContainer.querySelector('input');
+    const rsvpRadios = document.querySelectorAll('input[name="rsvpStatus"]');
+    const successMessage = document.getElementById('success-message');
+    const loadingSpinner = document.getElementById('loading-spinner');
+
+    phoneNumberInput.addEventListener('input', (event) => {
+      const input = event.target;
+      let value = input.value.replace(/[^0-9]/g, '');
+      
+      if (value.length > 3) {
+        value = value.substring(0, 3) + '-' + value.substring(3, 10);
+      }
+      
+      input.value = value;
+    });
+
+    rsvpRadios.forEach(radio => {
+      radio.addEventListener('change', (event) => {
+        const selectedValue = event.target.value;
+        if (selectedValue === 'כן' || selectedValue === 'אולי') {
+          quantityContainer.style.display = 'block';
+          quantityInput.required = true;
+          quantityInput.value = '';
+        } else if (selectedValue === 'לא') {
+          quantityContainer.style.display = 'none';
+          quantityInput.required = false;
+          quantityInput.value = '1';
+        }
+      });
+    });
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      let missingFields = [];
+
+      if (!form.fullName.value.trim()) {
+        missingFields.push('שם מלא');
+      }
+
+      const cleanedPhone = form.phoneNumber.value.replace(/[^0-9]/g, '');
+      if (cleanedPhone.length !== 10) {
+        missingFields.push('מספר טלפון (חייב להיות 10 ספרות)');
+      }
+
+      const rsvpSelected = form.querySelector('input[name="rsvpStatus"]:checked');
+      if (!rsvpSelected) {
+        missingFields.push('האם תגיע/י?');
+      }
+
+      if (rsvpSelected && (rsvpSelected.value === 'כן' || rsvpSelected.value === 'אולי')) {
+        if (!form.quantity.value || form.quantity.value < 1) {
+          missingFields.push('כמה אנשים? (חייב להיות לפחות 1)');
+        }
+      }
+
+      if (missingFields.length > 0) {
+        let errorMessage = "יש למלא את השדות הבאים:\n" + missingFields.join('\n');
+        alert(errorMessage);
+        return;
+      }
+
+      form.style.display = 'none';
+      loadingSpinner.style.display = 'block';
+      
+      const data = new FormData(form);
+      const params = new URLSearchParams(data);
+
+      fetch("https://script.google.com/macros/s/AKfycbwLKEsUCzg69aN8F-wjIE6GM84XkOtlW8mSeCu5aTYycm8MqLvnoEbglpSMuIY82u58/exec", {
+        method: "POST",
+        body: params
+      })
+      .then(response => {
+        loadingSpinner.style.display = 'none';
+        if (response.ok) {
+          successMessage.style.display = 'block';
+        } else {
+          alert("אירעה שגיאה בשליחה. נא לנסות שוב.");
+          form.style.display = 'block';
+        }
+      })
+      .catch(err => {
+        loadingSpinner.style.display = 'none';
+        alert("אירעה שגיאה בשליחה: " + err.message);
+        form.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>
