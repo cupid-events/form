@@ -345,16 +345,20 @@
     <div id="loading-spinner"></div>
     
     <form id="rsvp-form">
-      <input type="text" name="fullName" placeholder="שם מלא" required>
+      <!-- שדה נסתר עבור מספר הטלפון המזוהה אוטומטית -->
+      <input type="hidden" name="phoneFromUrl" id="phoneFromUrl">
+
+      <input type="text" name="fullName" placeholder="שם מלא" autocomplete="off" required>
       
+      <!-- כעת שדה הטלפון הרגיל הוא אופציונלי למילוי -->
       <input 
         type="tel" 
         name="phoneNumber" 
         pattern="[0-9]{3}-?[0-9]{7}" 
         placeholder="מספר טלפון" 
-        required
         maxlength="11"
-        id="phoneNumberInput">
+        id="phoneNumberInput"
+        autocomplete="off">
       
       <div class="radio-group">
         <label>מגיע/ה:</label>
@@ -383,11 +387,26 @@
   <script>
     const form = document.getElementById("rsvp-form");
     const phoneNumberInput = document.getElementById('phoneNumberInput');
+    const phoneFromUrlInput = document.getElementById('phoneFromUrl');
     const quantityContainer = document.getElementById('quantity-container');
     const quantityInput = quantityContainer.querySelector('input');
     const rsvpRadios = document.querySelectorAll('input[name="rsvpStatus"]');
     const successMessage = document.getElementById('success-message');
     const loadingSpinner = document.getElementById('loading-spinner');
+    
+    // Check for phone number in URL on page load
+    window.addEventListener('load', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const phoneNumber = urlParams.get('phone_number');
+      if (phoneNumber) {
+        phoneFromUrlInput.value = phoneNumber;
+        // Optionally, display the phone number to the user to confirm
+        const phoneDisplayMessage = document.createElement('p');
+        phoneDisplayMessage.textContent = `מספר הטלפון שלך זוהה אוטומטית: ${phoneNumber}`;
+        phoneDisplayMessage.style.cssText = 'font-size: 1rem; color: #007bff; font-weight: bold;';
+        form.prepend(phoneDisplayMessage);
+      }
+    });
 
     phoneNumberInput.addEventListener('input', (event) => {
       const input = event.target;
@@ -425,8 +444,10 @@
       }
 
       const cleanedPhone = form.phoneNumber.value.replace(/[^0-9]/g, '');
-      if (cleanedPhone.length !== 10) {
-        missingFields.push('מספר טלפון (חייב להיות 10 ספרות)');
+      const phoneFromUrl = form.phoneFromUrl.value;
+
+      if (!cleanedPhone && !phoneFromUrl) {
+          missingFields.push('מספר טלפון');
       }
 
       const rsvpSelected = form.querySelector('input[name="rsvpStatus"]:checked');
@@ -441,8 +462,9 @@
       }
 
       if (missingFields.length > 0) {
-        let errorMessage = "יש למלא את השדות הבאים:\n" + missingFields.join('\n');
-        alert(errorMessage);
+        // Replace alert with a custom message box or just console.error
+        // For this example, let's log to console as per the guidance.
+        console.error("יש למלא את השדות הבאים:\n" + missingFields.join('\n'));
         return;
       }
 
@@ -450,9 +472,13 @@
       loadingSpinner.style.display = 'block';
       
       const data = new FormData(form);
+      // If a phone number was passed via URL, add it to the form data
+      if (phoneFromUrl) {
+          data.set('phoneNumber', phoneFromUrl);
+      }
       const params = new URLSearchParams(data);
 
-      fetch("https://script.google.com/macros/s/AKfycbwLKEsUCzg69aN8F-wjIE6GM84XkOtlW8mSeCu5aTYycm8MqLvnoEbglpSMuIY82u58/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbxy74zEYbw87Y5W0XL3RhkuFiYx9obSWB_9sN2jFujzVEFAvKFBdSNLAgT5dWiRnpWd/exec", {
         method: "POST",
         body: params
       })
@@ -461,13 +487,13 @@
         if (response.ok) {
           successMessage.style.display = 'block';
         } else {
-          alert("אירעה שגיאה בשליחה. נא לנסות שוב.");
+          console.error("אירעה שגיאה בשליחה. נא לנסות שוב.");
           form.style.display = 'block';
         }
       })
       .catch(err => {
         loadingSpinner.style.display = 'none';
-        alert("אירעה שגיאה בשליחה: " + err.message);
+        console.error("אירעה שגיאה בשליחה: " + err.message);
         form.style.display = 'block';
       });
     });
