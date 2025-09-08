@@ -16,6 +16,11 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
+      background-image: url('https://via.placeholder.com/1920x1080/c0d9e6/333333?text=Main+Background');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
 
     .form-container {
@@ -34,19 +39,11 @@
       background-blend-mode: overlay;
       background-color: rgba(255, 255, 255, 0.85);
     }
-    
-    .form-container h1, .form-container h2, .form-container p, .form-container h3, .form-container label {
-        color: #333;
-        z-index: 2;
-        position: relative;
-    }
 
-    body {
-        background-image: url('https://via.placeholder.com/1920x1080/c0d9e6/333333?text=Main+Background');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
+    .form-container h1, .form-container h2, .form-container p, .form-container h3, .form-container label {
+      color: #333;
+      z-index: 2;
+      position: relative;
     }
 
     .header-content {
@@ -237,80 +234,77 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* התאמה למובייל */
     @media (max-width: 600px) {
-        .form-container {
-            padding: 20px;
-            width: 95%;
-            max-width: none;
-            box-shadow: none;
-            background-image: url('mm.jpg');
-            background-color: rgba(255, 255, 255, 0.8);
-        }
+      .form-container {
+        padding: 20px;
+        width: 95%;
+        max-width: none;
+        box-shadow: none;
+        background-image: url('mm.jpg');
+        background-color: rgba(255, 255, 255, 0.8);
+      }
 
-        h1 {
-            font-size: 2rem;
-        }
+      h1 {
+        font-size: 2rem;
+      }
 
-        .header-content p,
-        .parents-box p,
-        .parents-box h3 {
-            font-size: 0.9rem;
-        }
+      .header-content p,
+      .parents-box p,
+      .parents-box h3 {
+        font-size: 0.9rem;
+      }
 
-        .header-content .date {
-            font-size: 1.1rem;
-        }
+      .header-content .date {
+        font-size: 1.1rem;
+      }
 
-        h2 {
-            font-size: 1.5rem;
-        }
+      h2 {
+        font-size: 1.5rem;
+      }
 
-        input[type="text"],
-        input[type="tel"],
-        input[type="number"],
-        button {
-            padding: 12px;
-            font-size: 1rem;
-        }
+      input[type="text"],
+      input[type="tel"],
+      input[type="number"],
+      button {
+        padding: 12px;
+        font-size: 1rem;
+      }
 
-        /* שומר על הלחצנים בשורה אחת במובייל */
-        .radio-group {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .radio-item {
-            margin: 0 5px;
-        }
+      .radio-group {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .radio-item label {
-            padding-right: 25px;
-        }
+      .radio-item {
+        margin: 0 5px;
+      }
 
-        .radio-item label::before {
-            width: 18px;
-            height: 18px;
-        }
+      .radio-item label {
+        padding-right: 25px;
+      }
 
-        .radio-item input[type="radio"]:checked+label::after {
-            right: 4px;
-            top: 4px;
-            width: 10px;
-            height: 10px;
-        }
-        
-        /* הופך את סדר ההורים במובייל: הורי הכלה מימין והורי החתן משמאל */
-        .parents-row {
-            flex-direction: row-reverse;
-            gap: 20px;
-            justify-content: center;
-        }
+      .radio-item label::before {
+        width: 18px;
+        height: 18px;
+      }
 
-        .parents-box {
-            width: 48%;
-        }
+      .radio-item input[type="radio"]:checked+label::after {
+        right: 4px;
+        top: 4px;
+        width: 10px;
+        height: 10px;
+      }
+
+      .parents-row {
+        flex-direction: row-reverse;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .parents-box {
+        width: 48%;
+      }
     }
   </style>
 </head>
@@ -335,31 +329,20 @@
         <p>רפי ומירב מרגי</p>
       </div>
     </div>
-    
+
     <h2>טופס אישור הגעה</h2>
-    
+
     <div id="success-message">
       תשובתך נשמרה בהצלחה, תודה!
     </div>
-    
-    <div id="loading-spinner"></div>
-    
-    <form id="rsvp-form">
-      <!-- שדה נסתר עבור מספר הטלפון המזוהה אוטומטית -->
-      <input type="hidden" name="phoneFromUrl" id="phoneFromUrl">
 
+    <div id="loading-spinner"></div>
+
+    <form id="rsvp-form">
       <input type="text" name="fullName" placeholder="שם מלא" autocomplete="off" required>
-      
-      <!-- כעת שדה הטלפון הרגיל הוא אופציונלי למילוי -->
-      <input 
-        type="tel" 
-        name="phoneNumber" 
-        pattern="[0-9]{3}-?[0-9]{7}" 
-        placeholder="מספר טלפון" 
-        maxlength="11"
-        id="phoneNumberInput"
-        autocomplete="off">
-      
+      <input type="tel" name="phoneNumber" pattern="[0-9]{3}-?[0-9]{7}" placeholder="מספר טלפון" required maxlength="11" id="phoneNumberInput" autocomplete="off">
+      <input type="hidden" name="rsvpId" id="rsvpId">
+
       <div class="radio-group">
         <label>מגיע/ה:</label>
         <div class="radio-item">
@@ -375,11 +358,11 @@
           <label for="rsvp-maybe">אולי</label>
         </div>
       </div>
-      
+
       <div id="quantity-container">
         <input type="number" name="quantity" placeholder="כמה אנשים?" min="1">
       </div>
-      
+
       <button type="submit">שלח</button>
     </form>
   </div>
@@ -387,35 +370,25 @@
   <script>
     const form = document.getElementById("rsvp-form");
     const phoneNumberInput = document.getElementById('phoneNumberInput');
-    const phoneFromUrlInput = document.getElementById('phoneFromUrl');
     const quantityContainer = document.getElementById('quantity-container');
     const quantityInput = quantityContainer.querySelector('input');
     const rsvpRadios = document.querySelectorAll('input[name="rsvpStatus"]');
     const successMessage = document.getElementById('success-message');
     const loadingSpinner = document.getElementById('loading-spinner');
-    
-    // Check for phone number in URL on page load
-    window.addEventListener('load', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const phoneNumber = urlParams.get('phone_number');
-      if (phoneNumber) {
-        phoneFromUrlInput.value = phoneNumber;
-        // Optionally, display the phone number to the user to confirm
-        const phoneDisplayMessage = document.createElement('p');
-        phoneDisplayMessage.textContent = `מספר הטלפון שלך זוהה אוטומטית: ${phoneNumber}`;
-        phoneDisplayMessage.style.cssText = 'font-size: 1rem; color: #007bff; font-weight: bold;';
-        form.prepend(phoneDisplayMessage);
-      }
-    });
+
+    // זיהוי מזהה מה-URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const rsvpId = urlParams.get('rsvpId');
+    if (rsvpId) {
+      document.getElementById('rsvpId').value = rsvpId;
+    }
 
     phoneNumberInput.addEventListener('input', (event) => {
       const input = event.target;
       let value = input.value.replace(/[^0-9]/g, '');
-      
       if (value.length > 3) {
         value = value.substring(0, 3) + '-' + value.substring(3, 10);
       }
-      
       input.value = value;
     });
 
@@ -436,49 +409,30 @@
 
     form.addEventListener("submit", function(e) {
       e.preventDefault();
-      
       let missingFields = [];
 
-      if (!form.fullName.value.trim()) {
-        missingFields.push('שם מלא');
-      }
-
+      if (!form.fullName.value.trim()) missingFields.push('שם מלא');
       const cleanedPhone = form.phoneNumber.value.replace(/[^0-9]/g, '');
-      const phoneFromUrl = form.phoneFromUrl.value;
-
-      if (!cleanedPhone && !phoneFromUrl) {
-          missingFields.push('מספר טלפון');
-      }
-
+      if (cleanedPhone.length !== 10) missingFields.push('מספר טלפון (10 ספרות)');
       const rsvpSelected = form.querySelector('input[name="rsvpStatus"]:checked');
-      if (!rsvpSelected) {
-        missingFields.push('האם תגיע/י?');
-      }
-
+      if (!rsvpSelected) missingFields.push('האם תגיע/י?');
       if (rsvpSelected && (rsvpSelected.value === 'כן' || rsvpSelected.value === 'אולי')) {
         if (!form.quantity.value || form.quantity.value < 1) {
-          missingFields.push('כמה אנשים? (חייב להיות לפחות 1)');
+          missingFields.push('כמה אנשים? (לפחות 1)');
         }
       }
 
       if (missingFields.length > 0) {
-        // Replace alert with a custom message box or just console.error
-        // For this example, let's log to console as per the guidance.
-        console.error("יש למלא את השדות הבאים:\n" + missingFields.join('\n'));
+        alert("יש למלא את השדות הבאים:\n" + missingFields.join('\n'));
         return;
       }
 
       form.style.display = 'none';
       loadingSpinner.style.display = 'block';
-      
       const data = new FormData(form);
-      // If a phone number was passed via URL, add it to the form data
-      if (phoneFromUrl) {
-          data.set('phoneNumber', phoneFromUrl);
-      }
       const params = new URLSearchParams(data);
 
-      fetch("https://script.google.com/macros/s/AKfycbxvxRnU_Q05lDquimsi1xCYWFUW-jJQEHcSPkQIauF4TJNMSyT97MckwwIu5cTcx3I-/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbwLKEsUCzg69aN8F-wjIE6GM84XkOtlW8mSeCu5aTYycm8MqLvnoEbglpSMuIY82u58/exec", {
         method: "POST",
         body: params
       })
@@ -487,13 +441,13 @@
         if (response.ok) {
           successMessage.style.display = 'block';
         } else {
-          console.error("אירעה שגיאה בשליחה. נא לנסות שוב.");
+          alert("אירעה שגיאה בשליחה. נסה שוב.");
           form.style.display = 'block';
         }
       })
       .catch(err => {
         loadingSpinner.style.display = 'none';
-        console.error("אירעה שגיאה בשליחה: " + err.message);
+        alert("שגיאה: " + err.message);
         form.style.display = 'block';
       });
     });
